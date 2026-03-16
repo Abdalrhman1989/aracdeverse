@@ -1,19 +1,67 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'space-bg':      '#03030a',
+        'space-surface': '#0f0f2a',
+        'space-card':    '#141438',
+        'space-border':  'rgba(139,92,246,0.18)',
+        'space-text':    '#e2e8f0',
+        'space-muted':   '#94a3b8',
+        'space-dim':     '#64748b',
+        'neon-blue':     '#06b6d4',
+        'neon-purple':   '#8b5cf6',
+        'neon-green':    '#10b981',
+        'neon-orange':   '#f97316',
+        'neon-red':      '#ef4444',
+        'neon-yellow':   '#fbbf24',
+        'neon-pink':     '#ec4899',
+        neon:            '#8b5cf6',
+      },
+      fontFamily: {
+        orbitron: ['var(--font-orbitron)', 'monospace'],
+        rajdhani: ['var(--font-rajdhani)', 'sans-serif'],
+      },
+      animation: {
+        'twinkle':       'twinkle 3s ease-in-out infinite alternate',
+        'fadeUp':        'fadeUp 0.6s ease both',
+        'pulse-dot':     'pulse-dot 1.5s ease-in-out infinite',
+        'marquee':       'marquee 30s linear infinite',
+        'orb':           'orb 12s ease-in-out infinite alternate',
+        'scroll-dot':    'scroll-dot 1.5s ease-in-out infinite',
+        'glow-pulse':    'glow-pulse 2s ease-in-out infinite alternate',
+        'float':         'float 6s ease-in-out infinite',
+        'shimmer':       'shimmer 2.5s linear infinite',
+        'spin-slow':     'spin 8s linear infinite',
+        'card-hover':    'card-hover 0.3s ease forwards',
+        'scale-in':      'scale-in 0.4s ease both',
+        'slide-up':      'slide-up 0.5s ease both',
+        'neon-flicker':  'neon-flicker 4s ease-in-out infinite',
+      },
+      keyframes: {
+        twinkle:         { from: { opacity: '0.06' }, to: { opacity: '0.65' } },
+        fadeUp:          { from: { opacity: '0', transform: 'translateY(16px)' }, to: { opacity: '1', transform: 'none' } },
+        'pulse-dot':     { '0%,100%': { transform: 'scale(1)', opacity: '1' }, '50%': { transform: 'scale(1.5)', opacity: '0.4' } },
+        'marquee':       { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
+        'orb':           { from: { transform: 'translate(0,0) scale(1)', opacity: '0.4' }, to: { transform: 'translate(20px,20px) scale(1.15)', opacity: '0.7' } },
+        'scroll-dot':    { '0%,100%': { transform: 'translateY(0)', opacity: '0.8' }, '50%': { transform: 'translateY(6px)', opacity: '0.2' } },
+        'glow-pulse':    { from: { boxShadow: '0 0 20px rgba(139,92,246,0.3)' }, to: { boxShadow: '0 0 50px rgba(139,92,246,0.7)' } },
+        'float':         { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+        'shimmer':       { from: { backgroundPosition: '-200% 0' }, to: { backgroundPosition: '200% 0' } },
+        'card-hover':    { from: { transform: 'translateY(0)' }, to: { transform: 'translateY(-6px)' } },
+        'scale-in':      { from: { opacity: '0', transform: 'scale(0.9)' }, to: { opacity: '1', transform: 'scale(1)' } },
+        'slide-up':      { from: { opacity: '0', transform: 'translateY(24px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
+        'neon-flicker':  { '0%,100%': { opacity: '1' }, '92%': { opacity: '1' }, '93%': { opacity: '0.4' }, '94%': { opacity: '1' }, '95%': { opacity: '0.6' }, '96%': { opacity: '1' } },
       },
     },
   },
   plugins: [],
-};
-export default config;
+}
+export default config

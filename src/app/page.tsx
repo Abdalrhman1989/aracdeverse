@@ -1,101 +1,47 @@
-import Image from "next/image";
+import type { Metadata } from 'next'
+import { GAMES, CATEGORIES } from '@/lib/games'
+import HomeClient from '@/components/home/HomeClient'
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'ArcadeVerse — Play 40+ Free Online Games',
+  description: 'Play 40+ free browser games instantly. Snake, Tetris, Pac-Man, 2-player online multiplayer. No download, no login!',
+}
+
+const hotGames     = GAMES.filter(g => g.badge === 'hot').slice(0, 8)
+const multiGames   = GAMES.filter(g => g.is2P || g.hasOnline || g.badge === 'online').slice(0, 8)
+const newGames     = GAMES.filter(g => g.badge === 'new' || g.isNew).slice(0, 8)
+const topGames     = GAMES.filter(g => g.badge === 'top' || g.badge === 'hot').slice(0, 4)
+const featuredGame = GAMES.find(g => g.id === 'pacman') ?? GAMES[0]
+
+const MARQUEE_GAMES = GAMES.filter(g => !!g.badge).slice(0, 16)
+
+const TOP_10 = [
+  { rank:1,  id:'minecraft-classic', icon:'⛏️', name:'Minecraft Classic',    genre:'Sandbox',    plays:'11M',  color:'#fbbf24' },
+  { rank:2,  id:'agar-io',           icon:'🔵', name:'Agar.io',               genre:'Multiplayer', plays:'8.4M', color:'#06b6d4' },
+  { rank:3,  id:'snake2p',           icon:'🐍', name:'Snake Battle Online',   genre:'Online 2P',  plays:'567K', color:'#8b5cf6' },
+  { rank:4,  id:'wordle',            icon:'📝', name:'Wordle',                genre:'Puzzle',     plays:'6.7M', color:'#10b981' },
+  { rank:5,  id:'pacman',            icon:'👾', name:'Pac-Man Clone',         genre:'Retro',      plays:'50K',  color:'#f97316' },
+  { rank:6,  id:'krunker-io',        icon:'🎯', name:'Krunker.io',            genre:'Shooting',   plays:'5.2M', color:'#ef4444' },
+  { rank:7,  id:'geometry-dash',     icon:'🔷', name:'Geometry Dash',         genre:'Action',     plays:'4.8M', color:'#06b6d4' },
+  { rank:8,  id:'airhockey',         icon:'🏒', name:'Air Hockey 2P',         genre:'Sports',     plays:'412K', color:'#8b5cf6' },
+  { rank:9,  id:'tetris',            icon:'🧱', name:'Tetris Classic',        genre:'Puzzle',     plays:'980K', color:'#ec4899' },
+  { rank:10, id:'platformer',        icon:'🏃', name:'Pixel Dash',            genre:'Action',     plays:'35K',  color:'#fbbf24' },
+]
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="overflow-x-hidden">
+      <HomeClient
+        featuredGame={featuredGame}
+        hotGames={hotGames}
+        multiGames={multiGames}
+        newGames={newGames}
+        topGames={topGames}
+        marqueeGames={MARQUEE_GAMES}
+        top10={TOP_10}
+        categories={CATEGORIES}
+        totalGames={GAMES.length}
+      />
     </div>
-  );
+  )
 }
